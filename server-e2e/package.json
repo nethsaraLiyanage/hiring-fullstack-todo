@@ -1,0 +1,26 @@
+{
+  "name": "@hiring-fullstack-todo/server-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@hiring-fullstack-todo/server"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "server-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@hiring-fullstack-todo/server:build",
+          "@hiring-fullstack-todo/server:serve"
+        ]
+      }
+    }
+  }
+}

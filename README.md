@@ -4,7 +4,75 @@
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+A fullstack todo application with React frontend and Express backend.
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- MongoDB (running locally or connection string)
+
+### Installation
+
+1. Install dependencies:
+
+```sh
+npm install
+```
+
+### Running the Project
+
+#### Option 1: Run Both Client and Server Together (Recommended)
+
+Run both the client and server in parallel using Nx:
+
+```sh
+npx nx run-many --targets=dev,serve --projects=client,server --parallel
+```
+
+This will:
+
+- Start the **client** (React/Vite) on `http://localhost:3000`
+- Start the **server** (Express) on `http://localhost:8`
+
+#### Option 2: Run in Separate Terminals
+
+**Terminal 1 - Server:**
+
+```sh
+npx nx serve server
+```
+
+**Terminal 2 - Client:**
+
+```sh
+npx nx dev client
+```
+
+### Environment Variables
+
+The server requires MongoDB. Create a `.env` file in the root directory (optional if using default):
+
+```env
+MONGO_URI=mongodb://localhost:27017/mydatabase
+PORT=3338
+```
+
+The client can optionally set:
+
+```env
+NX_API_URL=http://localhost:3338/api
+```
+
+### Access the Application
+
+- **Frontend**: http://localhost:3000
+- **Backend API**: http://localhost:3338/api
+
+---
+
+[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
 ## Generate a library
 
@@ -97,12 +165,13 @@ Nx Console is an editor extension that enriches your developer experience. It le
 
 Learn more:
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
 And join the Nx community:
+
 - [Discord](https://go.nx.dev/community)
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
