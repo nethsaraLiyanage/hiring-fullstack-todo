@@ -14,17 +14,21 @@ const transformTask = (task: any) => {
   };
 };
 
-// GET /api/tasks - Get all tasks
+// GET /api/todos - Get all todos
 router.get('/', async (req: Request, res: Response) => {
   try {
     const tasks = await Task.find().sort({ createdAt: -1 });
     return res.json(tasks.map(transformTask));
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to fetch tasks' });
+    console.error('Error fetching tasks:', error);
+    return res.status(500).json({
+      error: 'Failed to fetch tasks',
+      details: error instanceof Error ? error.message : String(error),
+    });
   }
 });
 
-// POST /api/tasks - Create a new task
+// POST /api/todos - Create a new todo
 router.post('/', async (req: Request, res: Response) => {
   try {
     const { title, description } = req.body;
@@ -51,11 +55,15 @@ router.post('/', async (req: Request, res: Response) => {
     const savedTask = await task.save();
     return res.status(201).json(transformTask(savedTask));
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to create task' });
+    console.error('Error creating task:', error);
+    return res.status(500).json({
+      error: 'Failed to create task',
+      details: error instanceof Error ? error.message : String(error),
+    });
   }
 });
 
-// PUT /api/tasks/:id - Update a task
+// PUT /api/todos/:id - Update a todo
 router.put('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -89,11 +97,15 @@ router.put('/:id', async (req: Request, res: Response) => {
 
     return res.json(transformTask(task));
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to update task' });
+    console.error('Error updating task:', error);
+    return res.status(500).json({
+      error: 'Failed to update task',
+      details: error instanceof Error ? error.message : String(error),
+    });
   }
 });
 
-// DELETE /api/tasks/:id - Delete a task
+// DELETE /api/todos/:id - Delete a todo
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -105,7 +117,11 @@ router.delete('/:id', async (req: Request, res: Response) => {
 
     return res.status(204).send();
   } catch (error) {
-    return res.status(500).json({ error: 'Failed to delete task' });
+    console.error('Error deleting task:', error);
+    return res.status(500).json({
+      error: 'Failed to delete task',
+      details: error instanceof Error ? error.message : String(error),
+    });
   }
 });
 

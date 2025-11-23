@@ -16,7 +16,7 @@ const api = axios.create({
 export const taskApi = {
   // Get all tasks
   getAll: async (): Promise<Task[]> => {
-    const response = await api.get<Task[]>('/tasks');
+    const response = await api.get<Task[]>('/todos');
     return response.data.map((task) => ({
       ...task,
       createdAt: new Date(task.createdAt),
@@ -25,7 +25,7 @@ export const taskApi = {
 
   // Create a new task
   create: async (data: TaskFormData): Promise<Task> => {
-    const response = await api.post<Task>('/tasks', data);
+    const response = await api.post<Task>('/todos', data);
     return {
       ...response.data,
       createdAt: new Date(response.data.createdAt),
@@ -34,7 +34,7 @@ export const taskApi = {
 
   // Update a task
   update: async (id: string, data: Partial<Task>): Promise<Task> => {
-    const response = await api.put<Task>(`/tasks/${id}`, data);
+    const response = await api.put<Task>(`/todos/${id}`, data);
     return {
       ...response.data,
       createdAt: new Date(response.data.createdAt),
@@ -43,12 +43,12 @@ export const taskApi = {
 
   // Delete a task
   delete: async (id: string): Promise<void> => {
-    await api.delete(`/tasks/${id}`);
+    await api.delete(`/todos/${id}`);
   },
 
   // Toggle task completion
   toggleComplete: async (id: string, completed: boolean): Promise<Task> => {
-    const response = await api.put<Task>(`/tasks/${id}`, { completed });
+    const response = await api.put<Task>(`/todos/${id}`, { completed });
     return {
       ...response.data,
       createdAt: new Date(response.data.createdAt),
